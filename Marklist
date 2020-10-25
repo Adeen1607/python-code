@@ -1,0 +1,41 @@
+marks = {'Adeen': 90, 'Yameen': 55, 'Sidra': 30 ,'Hassaan':45}
+def mark(student_name):
+    global marks
+    for student in marks:
+        if student == student_name:
+           print("\n",student,'has scored: ',marks[student],"%")
+           break
+    else:
+         print('No entry with that name found.')
+def result(student_name):
+    global marks
+    for student in marks:
+        if student == student_name:
+            if marks[student]>50:
+               
+                print(student,' has passed')
+            else:
+                print(student,'has failed by',50-marks[student],"%")
+def grade(student_name):
+    global marks
+    for student in marks:
+        if student == student_name:
+            
+            if marks[student]>=90:
+               print(student," has GRADE:O")
+            elif marks[student]>=80:
+                print(student," has GRADE:A+")
+            elif marks[student]>=70:
+                print(student,"has GRADE:A")
+            elif marks[student]>=60:
+                print(student,"has GRADE:B")
+            elif marks[student]>=50:
+                print(student," has GRADE:C")
+            elif marks[student]<50:
+                print(student," has GRADE:D")
+            
+                
+st_name=input("enter student name:\t")
+mark(st_name)
+grade(st_name)
+result(st_name)

@@ -23,7 +23,9 @@ class DisjointSet:
         self.components = size
 
     def find(self, node: int) -> int:
-        """Return the representative for node."""
+        """Return the representative for a valid zero-based node index."""
+        if not 0 <= node < len(self.parent):
+            raise IndexError("node index out of range")
         while node != self.parent[node]:
             self.parent[node] = self.parent[self.parent[node]]
             node = self.parent[node]

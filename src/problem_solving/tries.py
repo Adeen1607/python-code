@@ -45,14 +45,16 @@ class Trie:
         if node is None:
             return []
         words: list[str] = []
-
-        def collect(current: dict[str, dict], suffix: str) -> None:
+        stack: list[tuple[dict[str, dict], str]] = [(node, prefix)]
+        while stack:
+            current, word = stack.pop()
             if self._END in current:
-                words.append(prefix + suffix)
-            for character in sorted(key for key in current if key != self._END):
-                collect(current[character], suffix + character)
-
-        collect(node, "")
+                words.append(word)
+            # Reverse order for a stack-based depth-first lexical traversal.
+            for character in sorted(
+                (key for key in current if key != self._END), reverse=True
+            ):
+                stack.append((current[character], word + character))
         return words
 
     def _find_node(self, text: str) -> dict[str, dict] | None:

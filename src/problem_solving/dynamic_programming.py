@@ -3,6 +3,8 @@
 from __future__ import annotations
 
 from bisect import bisect_left
+from functools import reduce
+from math import gcd
 from collections.abc import Iterable, Sequence
 
 
@@ -16,6 +18,12 @@ def coin_change_minimum(coins: Iterable[int], amount: int) -> int | None:
     denominations = sorted(set(coins))
     if any(coin <= 0 for coin in denominations):
         raise ValueError("coin denominations must be positive")
+
+    if amount == 0:
+        return 0
+    denominations = [coin for coin in denominations if coin <= amount]
+    if not denominations or amount % reduce(gcd, denominations) != 0:
+        return None
 
     unreachable = amount + 1
     best = [0] + [unreachable] * amount
